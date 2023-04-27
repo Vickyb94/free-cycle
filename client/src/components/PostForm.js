@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const PostForm = () => {
   return (
@@ -28,4 +28,4 @@ const PostForm = () => {
   )
 }
 
-export default PostForm
+export default PostForm;
