@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
@@ -16,7 +16,7 @@ const CommentForm = ({ postId }) => {
     event.preventDefault();
 
     try {
-      const { data } = await addCpmment({
+      const { data } = await addComment({
         variables: {
           postId,
           commentText,

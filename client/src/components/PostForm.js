@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
 import { ADD_POST } from '../utils/mutations';
-import { QUERY_POSTS, QUERY_THOUGHTS } from '../utils/queries';
+import { QUERY_POSTS } from '../utils/queries';
 
 import Auth from '../utils/auth';
 
@@ -11,6 +11,7 @@ const PostForm = () => {
   const [postText, setPostText] = useState('');
 
   const [characterCount, setCharacterCount] = useState(0);
+  
   const [addPost, { error }] = useMutation(ADD_POST, {
     update(cache, { data: { addPost } }) {
       try {
@@ -32,12 +33,12 @@ const PostForm = () => {
     try {
       const { data } = await addPost({
         variables: {
-          thoughtText,
-          thoughtAuthor: Auth.getProfile().data.username,
+          postText,
+          postAuthor: Auth.getProfile().data.username,
         },
       });
 
-      setThoughtText('');
+      setPostText('');
     } catch (err) {
       console.error(err);
     }
@@ -47,7 +48,7 @@ const PostForm = () => {
     const { name, value } = event.target;
 
     if (name === 'thoughtText' && value.length <= 280) {
-      setThoughtText(value);
+      setPostText(value);
       setCharacterCount(value.length);
     }
   }
